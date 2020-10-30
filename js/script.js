@@ -79,6 +79,20 @@ function renderHand(){
 }
 
 
+function gameStartAnimation( x , n ){
+  for(i = 0 ; i < x ; i++)
+  setTimeout(function(){
+    document.getElementById('upper').classList.toggle('toplayer')
+  }, i*900)
+  setTimeout(function(){
+    for(y=0 ; y < n ; y++){
+      setTimeout(function(){
+        document.getElementById('upper').classList.toggle('tocpu')
+      }, y * 900)
+    }
+  },3600)
+}
+
 deckCreation();
 shuffleDeck();
 startGame();

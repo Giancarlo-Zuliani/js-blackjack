@@ -17,7 +17,7 @@ header{
   background-color: lightgreen;
   justify-content: flex-start;
   align-items: stretch;
-  margin: 150px auto;
+  margin: 50px auto;
 }
 
 .playercard{
@@ -26,6 +26,52 @@ header{
   background-size: cover;
 }
 
+#console{
+  display:flex;
+  width:50%;
+  background-color: lightgrey;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 auto;
+  position: relative;
+}
 button{
   padding:50px;
+}
+
+.deckback{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:300px;
+  height:200px;
+  background-color: green;
+}
+
+#upper{
+  z-index: 5;
+  background-color: black;
+}
+
+.tocpu{
+  animation:cardbackslidetocpu .5s linear 1;
+
+}
+
+.toplayer{
+  animation:cardbackslidetoplayer .5s linear 1;
+}
+
+@keyframes cardbackslidetoplayer{
+  50%{transform: translateY(30%); opacity : .8}
+  60%{transform: translateY(40%); opacity : .7}
+  70%{transform: translateY(45%); opacity : .5}
+  100%{transform: translateY(50%); opacity : .0}
+}
+
+@keyframes cardbackslidetocpu {
+  50%{transform: translateY(-30%); opacity : .8}
+  60%{transform: translateY(-40%); opacity : .7}
+  70%{transform: translateY(-45%); opacity : .5}
+  100%{transform: translateY(-50%); opacity : .0}
 }
