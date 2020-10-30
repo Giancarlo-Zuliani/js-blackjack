@@ -18,7 +18,6 @@ function deckCreation(){
   var imgindex = 0;
   for(i=0;i<values.length;i++){
     for(j=0;j<color.length;j++){
-      imgindex++
       var num = parseInt(values[i]);
       if(values[i] == 'J' || values[i] == 'Q' || values[i] == 'K'){
         num = 10;
@@ -26,7 +25,8 @@ function deckCreation(){
       if(values[i] == 'A'){
         num = 11;
       }
-      var card = {Values : values[i] , color : color[j] , num : num , img : "resources/card" + imgindex};
+      var card = {Values : values[i] , color : color[j] , num : num , img : "resources/deck/card" + imgindex};
+      imgindex++
       deck.push(card);
     }
   }
