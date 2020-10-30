@@ -12,6 +12,8 @@ var cpu = {
   hand:[],
 }
 
+var timeUnit = 300;
+
 
 function deckCreation(){
   deck=[];
@@ -80,19 +82,22 @@ function renderHand(){
 
 
 function gameStartAnimation( x , n ){
-  for(i = 0 ; i < x ; i++)
+  for(i = 0 ; i < x*2 ; i++)
   setTimeout(function(){
     document.getElementById('upper').classList.toggle('toplayer')
-  }, i*900)
+  }, i*timeUnit)
   setTimeout(function(){
-    for(y=0 ; y < n ; y++){
+    for(y=0 ; y < n * 2 ; y++){
       setTimeout(function(){
         document.getElementById('upper').classList.toggle('tocpu')
-      }, y * 900)
+      }, y * timeUnit)
     }
-  },3600)
+  },timeUnit * 4)
+  setTimeout(renderHand,timeUnit * 8)
 }
+function hit(){
 
+}
 deckCreation();
 shuffleDeck();
 startGame();
