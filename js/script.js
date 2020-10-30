@@ -15,8 +15,10 @@ var cpu = {
 
 function deckCreation(){
   deck=[];
+  var imgindex = 0;
   for(i=0;i<values.length;i++){
     for(j=0;j<color.length;j++){
+      imgindex++
       var num = parseInt(values[i]);
       if(values[i] == 'J' || values[i] == 'Q' || values[i] == 'K'){
         num = 10;
@@ -24,7 +26,7 @@ function deckCreation(){
       if(values[i] == 'A'){
         num = 11;
       }
-      var card = {Values : values[i] , color : color[j] , num : num};
+      var card = {Values : values[i] , color : color[j] , num : num , img : "resources/card" + imgindex};
       deck.push(card);
     }
   }
@@ -58,6 +60,23 @@ function calcolatePoints(){
     cpu.points += cpu.hand[j].num;
   }
 }
+
+
+function renderHand(){
+  for(i=0;i < player.hand.length; i++){
+  var child = document.createElement('div');
+  child.classList.add = "playercard";
+  child.style.backgroundImage = "url(" + player.hand[i].img + ")";
+  document.getElementById('field').appendChild(child);
+  }
+  for(i=0 ; i < cpu.hand.length ; i++){
+    var child = document.createElement('div')
+    child.classList.add="cpucard";
+    child.style.backgroundImage="url(" + cpu.hand[i].img + ")";
+    document.getElementById('cpufield').appendChild(child)
+  }
+}
+
 
 deckCreation();
 shuffleDeck();
