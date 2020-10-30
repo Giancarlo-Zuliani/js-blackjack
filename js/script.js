@@ -25,7 +25,7 @@ function deckCreation(){
       if(values[i] == 'A'){
         num = 11;
       }
-      var card = {Values : values[i] , color : color[j] , num : num , img : "resources/deck/card" + imgindex};
+      var card = {Values : values[i] , color : color[j] , num : num , img : "resources/deck/card" + imgindex + ".svg"};
       imgindex++
       deck.push(card);
     }
@@ -65,15 +65,16 @@ function calcolatePoints(){
 function renderHand(){
   for(i=0;i < player.hand.length; i++){
   var child = document.createElement('div');
-  child.classList.add = "playercard";
+  child.classList.add('playercard');
   child.style.backgroundImage = "url(" + player.hand[i].img + ")";
-  document.getElementById('field').appendChild(child);
+  document.getElementById('usersection').appendChild(child);
   }
   for(i=0 ; i < cpu.hand.length ; i++){
     var child = document.createElement('div')
-    child.classList.add="cpucard";
-    child.style.backgroundImage="url(" + cpu.hand[i].img + ")";
-    document.getElementById('cpufield').appendChild(child)
+    child.classList.add('playercard');
+    var x = "url( " + cpu.hand[i].img + ")"
+    child.style.backgroundImage= x ;
+    document.getElementById('cpusection').appendChild(child)
   }
 }
 
