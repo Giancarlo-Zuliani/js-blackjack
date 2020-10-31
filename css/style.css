@@ -63,12 +63,12 @@ button{
   background-color: black;
 }
 
-.tocpu{
+.cpu{
   animation:cardbackslidetocpu .3s linear 1;
 
 }
 
-.toplayer{
+.user{
   animation:cardbackslidetoplayer .3s linear 1;
 }
 
