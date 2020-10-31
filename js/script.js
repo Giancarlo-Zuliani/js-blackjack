@@ -13,7 +13,7 @@ var cpu = {
 }
 
 var timeUnit = 400;
-
+var hiddenswitch = true;
 
 var cardSlideSound = new Audio ('resources/effects/cardslide.mp3')
 
@@ -68,12 +68,12 @@ function calcolatePoints(){
 
 function renderHand(string){
   if (string === "user"){
-  var child = document.createElement('div');
-  child.classList.add('playercard');
-  var index = player.hand.length - 1;
-  child.style.backgroundImage = "url(" + player.hand[index].img + ")";
-  document.getElementById('usersection').appendChild(child);
-}else if (string === "cpu"){
+    var child = document.createElement('div');
+    child.classList.add('playercard');
+    var index = player.hand.length - 1;
+    child.style.backgroundImage = "url(" + player.hand[index].img + ")";
+    document.getElementById('usersection').appendChild(child);
+  }else if (string === "cpu"){
     var child = document.createElement('div')
     child.classList.add('playercard');
     var index = cpu.hand.length - 1;
@@ -88,6 +88,9 @@ function renderHand(string){
   }
 };
 
+function animateCard(string){
+  document.getElementById('upper').classList.toggle(string)
+}
 
 
 function hit( x , n ){
@@ -100,27 +103,26 @@ function hit( x , n ){
       },i*timeUnit )
     }
     setTimeout(function(){
-    document.getElementById('upper').classList.toggle('user')
+      animateCard('user')
   },i*timeUnit)
   }
   setTimeout(function(){
-      for(y=0 ; y < n * 2 ;y++){
-        if(y===0||y===2){
-          console.log(y)
+      for(i = 0 ; i < n * 2 ; i++){
+        if( i === 0 || i === 2){
           setTimeout(function(){
             cpu.hand.push(deck.pop());
-            console.log(y)
-            if( y === 2){
+            if( i === 2 && (hiddenswitch)){
               renderHand("hidden")
+              var hiddenswitch = false;
             }else{
               renderHand("cpu")
             }
             cardSlideSound.play()
-          },y * timeUnit)
+          },i * timeUnit)
         }
         setTimeout(function(){
-        document.getElementById('upper').classList.toggle('cpu')
-      }, y * timeUnit)
+          animateCard('cpu')
+        }, i * timeUnit)
     }
   },timeUnit * (i+1))
 }
