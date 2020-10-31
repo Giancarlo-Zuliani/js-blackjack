@@ -12,7 +12,7 @@ var cpu = {
   hand:[],
 }
 
-var timeUnit = 350;
+var timeUnit = 400;
 
 
 var cardSlideSound = new Audio ('resources/effects/cardslide.mp3')
@@ -73,12 +73,17 @@ function renderHand(string){
   var index = player.hand.length - 1;
   child.style.backgroundImage = "url(" + player.hand[index].img + ")";
   document.getElementById('usersection').appendChild(child);
-}else{
+}else if (string === "cpu"){
     var child = document.createElement('div')
     child.classList.add('playercard');
     var index = cpu.hand.length - 1;
     child.style.backgroundImage= "url( " + cpu.hand[index].img + ")" ;
     document.getElementById('cpusection').appendChild(child)
+  }else if(string === "hidden"){
+    var child = document.createElement('div')
+    child.classList.add('playercard');
+    var index = cpu.hand.length - 1;
+    child.style.backgroundImage= "url(resources/deckback.png)"
   }
 };
 
@@ -102,7 +107,11 @@ function hit( x , n ){
         if(y % 3 === 0){
           setTimeout(function(){
             cpu.hand.push(deck.pop());
-            renderHand()
+            if( y === 1){
+              renderHand("hidden")
+          }else{
+            renderHand("cpu")
+          }
             cardSlideSound.play()
           },y * timeUnit)
         }
