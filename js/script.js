@@ -45,12 +45,12 @@ function shuffleDeck(){
   }
 }
 
-function startGame(){
-  for(i=0 ; i < 2;i++){
-    player.hand.push(deck.pop());
-    cpu.hand.push(deck.pop());
-  }
-}
+// function startGame(){
+//   for(i=0 ; i < 2;i++){
+//     player.hand.push(deck.pop());
+//     cpu.hand.push(deck.pop());
+//   }
+// }
 
 function calcolatePoints(){
   player.points = 0;
@@ -64,43 +64,56 @@ function calcolatePoints(){
 }
 
 
-function renderHand(){
-  for(i=0;i < player.hand.length; i++){
+function renderHand(string){
+  if (string === "user"){
   var child = document.createElement('div');
   child.classList.add('playercard');
-  child.style.backgroundImage = "url(" + player.hand[i].img + ")";
+  var index = player.hand.length - 1;
+  child.style.backgroundImage = "url(" + player.hand[index].img + ")";
   document.getElementById('usersection').appendChild(child);
-  }
-  for(i=0 ; i < cpu.hand.length ; i++){
+}else{
     var child = document.createElement('div')
     child.classList.add('playercard');
-    var x = "url( " + cpu.hand[i].img + ")"
-    child.style.backgroundImage= x ;
+    var index = cpu.hand.length - 1;
+    child.style.backgroundImage= "url( " + cpu.hand[index].img + ")" ;
     document.getElementById('cpusection').appendChild(child)
   }
-}
+};
 
 
-function gameStartAnimation( x , n ){
-  for(i = 0 ; i < x*2 ; i++)
-  setTimeout(function(){
-    document.getElementById('upper').classList.toggle('toplayer')
-  }, i*timeUnit)
-  setTimeout(function(){
-    for(y=0 ; y < n * 2 ; y++){
+
+function hit( x , n ){
+  for(i = 0 ; i < x*2 ; i++){
+    if(i % 3 === 0){
       setTimeout(function(){
+        player.hand.push(deck.pop());
+        renderHand("user")
+      },i*timeUnit )
+    }
+    setTimeout(function(){
+    document.getElementById('upper').classList.toggle('toplayer')
+  },i*timeUnit)
+  }
+  setTimeout(function(){
+      for(y=0 ; y < n * 2 ; y++){
+        if(y % 3 === 0){
+          setTimeout(function(){
+            cpu.hand.push(deck.pop());
+            renderHand()
+          },y * timeUnit)
+        }
+        setTimeout(function(){
+        console.log(y);
         document.getElementById('upper').classList.toggle('tocpu')
       }, y * timeUnit)
     }
-  },timeUnit * 4)
-  setTimeout(renderHand,timeUnit * 8)
+  },timeUnit * (i+1))
 }
-function hit(){
 
-}
+
 deckCreation();
 shuffleDeck();
-startGame();
+
 console.log(deck);
 console.log(cpu.hand,player.hand)
 calcolatePoints()
