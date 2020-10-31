@@ -47,7 +47,7 @@ function shuffleDeck(){
   }
 }
 
-function renderHand(string){
+function renderCard(string){
   if (string === "user"){
     var child = document.createElement('div');
     child.classList.add('playercard');
@@ -89,7 +89,7 @@ function firstHand(){
 
 function giveCard(arr,string){
   arr.hand.push(deck.pop())
-  renderHand(string)
+  renderCard(string)
   cardSlideSound.play();
 }
 

@@ -10,26 +10,33 @@
     <header>
       <h1>BLack Jack</h1>
     </header>
+    <main>
 
-    <section id="cpusection" class="hand">
-
-    </section>
-    <section id="console">
-      <button type="button" onclick="firstHand()" name="button">hit</button>
-      <button type="button" onclick="giveCard(user , 'user')" name="button">hit</button>
-
-      <div id="deck">
+    <aside id="deck">
         <div class="deckback" id="upper">
 
         </div>
         <div class="deckback" id="staticback">
 
         </div>
-      </div>
+    </aside>
+    <div class="">
+
+    <section id="cpusection" class="hand">
+
     </section>
 
     <section id="usersection" class="hand">
     </section>
+    <section id="console">
+      <button type="button" onclick="firstHand()" name="button">hit</button>
+      <button type="button" onclick="giveCard(user , 'user')" name="button">hit</button>
+
+
+    </section>
+  </div>
+  </main>
+
 
     <script src="js\script.js" charset="utf-8"></script>
   </body>
