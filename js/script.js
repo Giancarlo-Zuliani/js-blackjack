@@ -12,8 +12,10 @@ var cpu = {
   hand:[],
 }
 
-var timeUnit = 300;
+var timeUnit = 350;
 
+
+var cardSlideSound = new Audio ('resources/effects/cardslide.mp3')
 
 function deckCreation(){
   deck=[];
@@ -88,6 +90,7 @@ function hit( x , n ){
       setTimeout(function(){
         player.hand.push(deck.pop());
         renderHand("user")
+        cardSlideSound.play()
       },i*timeUnit )
     }
     setTimeout(function(){
@@ -100,6 +103,7 @@ function hit( x , n ){
           setTimeout(function(){
             cpu.hand.push(deck.pop());
             renderHand()
+            cardSlideSound.play()
           },y * timeUnit)
         }
         setTimeout(function(){
