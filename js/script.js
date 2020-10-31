@@ -1,8 +1,8 @@
 var color = ['spades','flowers','diamonds','hearts'];
 var values = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
 var deck=[];
-var user = {
-  name : 'user' ,
+var player = {
+  name : 'player' ,
   points : 0 ,
   hand : [] ,
 }
@@ -49,16 +49,16 @@ function shuffleDeck(){
 
 // function startGame(){
 //   for(i=0 ; i < 2;i++){
-//     user.hand.push(deck.pop());
+//     player.hand.push(deck.pop());
 //     cpu.hand.push(deck.pop());
 //   }
 // }
 
 function calcolatePoints(){
-  user.points = 0;
+  player.points = 0;
   cpu.points = 0;
-  for(i=0;i<user.hand.length;i++){
-    user.points += user.hand[i].num;
+  for(i=0;i<player.hand.length;i++){
+    player.points += player.hand[i].num;
   }
   for(j=0;j<cpu.hand.length;j++){
     cpu.points += cpu.hand[j].num;
@@ -66,12 +66,12 @@ function calcolatePoints(){
 }
 
 
-function renderCard(string){
+function renderHand(string){
   if (string === "user"){
   var child = document.createElement('div');
   child.classList.add('playercard');
-  var index = user.hand.length - 1;
-  child.style.backgroundImage = "url(" + user.hand[index].img + ")";
+  var index = player.hand.length - 1;
+  child.style.backgroundImage = "url(" + player.hand[index].img + ")";
   document.getElementById('usersection').appendChild(child);
 }else if (string === "cpu"){
     var child = document.createElement('div')
@@ -83,54 +83,44 @@ function renderCard(string){
     var child = document.createElement('div')
     child.classList.add('playercard');
     var index = cpu.hand.length - 1;
-    child.style.backgroundImage= "url(resources/deckback.png)"
+    child.style.backgroundImage= "url(resources/deckback.png)" ;
+    document.getElementById('cpusection').appendChild(child)
   }
 };
 
-function pushCard(string){
-  if(string ==="user")
-  user.hand.push(deck.pop());
-  cardSlideSound.play();
-  if(string === "cpu"){
-    cpu.hand.push(deck.pop());
-  }
-}
 
-function giveCard(string){
-    pushCard(string);
-    renderCard(string);
-    giveAnimation(string);
-}
-
-function giveAnimation(string){
-  if(string === "user"){
-    var x = document.getElementById('upper');
-    x.classList.toggle("user");
-    x.classList.toggle("user");
-    
-  }else{
-      var x = document.getElementById('upper');
-      x.classList.toggle("cpu");
-  }
-}
 
 function hit( x , n ){
   for(i = 0 ; i < x*2 ; i++){
-    if(i % 3 === 0){
-      setTimeout(giveCard("user"),timeUnit * (i+1))
+    if(i === 0 || i === 2 ){
+      setTimeout(function(){
+        player.hand.push(deck.pop());
+        renderHand("user")
+        cardSlideSound.play()
+      },i*timeUnit )
     }
+    setTimeout(function(){
+    document.getElementById('upper').classList.toggle('user')
+  },i*timeUnit)
   }
   setTimeout(function(){
-      for(y=0 ; y < n * 2 ; y++){
-        if(y % 3 === 0){
+      for(y=0 ; y < n * 2 ;y++){
+        if(y===0||y===2){
+          console.log(y)
           setTimeout(function(){
-            if( y === 1){
-              giveCard("hidden")
-          }else{
-            giveCard("cpu")
-          }
-        },y * timeUnit)
-      }
+            cpu.hand.push(deck.pop());
+            console.log(y)
+            if( y === 2){
+              renderHand("hidden")
+            }else{
+              renderHand("cpu")
+            }
+            cardSlideSound.play()
+          },y * timeUnit)
+        }
+        setTimeout(function(){
+        document.getElementById('upper').classList.toggle('cpu')
+      }, y * timeUnit)
     }
   },timeUnit * (i+1))
 }
@@ -138,3 +128,9 @@ function hit( x , n ){
 
 deckCreation();
 shuffleDeck();
+
+console.log(deck);
+console.log(cpu.hand,player.hand)
+calcolatePoints()
+console.log(player.points , " player point")
+console.log(cpu.points , " cpu point")
