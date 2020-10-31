@@ -64,12 +64,10 @@ button{
 }
 
 .cpu{
-  animation:cardbackslidetocpu .3s linear 1;
 
 }
 
 .user{
-  animation:cardbackslidetoplayer .3s linear 1;
 }
 
 @keyframes cardbackslidetoplayer{
@@ -78,8 +76,21 @@ button{
   70%{transform: translate(-50% , 45%); opacity : .5}
   100%{transform: translate(-50% , 50%); opacity : .0}
 }
+@keyframes cardbackslidetoplayer2{
+  50%{transform: translate(-50% , 30%); opacity : .8}
+  60%{transform: translate(-50% , 40%;); opacity : .7}
+  70%{transform: translate(-50% , 45%); opacity : .5}
+  100%{transform: translate(-50% , 50%); opacity : .0}
+}
 
 @keyframes cardbackslidetocpu {
+  50%{transform: translate(-50%, -80% ); opacity : .8}
+  60%{transform: translate(-50%, -90% ); opacity : .7}
+  70%{transform: translate(-50%, -95% ); opacity : .5}
+  100%{transform: translate(-50%, -100% ); opacity : .0}
+}
+
+@keyframes cardbackslidetocpu2{
   50%{transform: translate(-50%, -80% ); opacity : .8}
   60%{transform: translate(-50%, -90% ); opacity : .7}
   70%{transform: translate(-50%, -95% ); opacity : .5}

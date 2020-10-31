@@ -12,7 +12,7 @@ var cpu = {
   hand:[],
 }
 
-var timeUnit = 400;
+var timeUnit = 1000;
 var hiddenswitch = true;
 
 var cardSlideSound = new Audio ('resources/effects/cardslide.mp3')
@@ -88,44 +88,32 @@ function renderHand(string){
   }
 };
 
-function animateCard(string){
-  document.getElementById('upper').classList.toggle(string)
-}
-
-
-function hit( x , n ){
-  for(i = 0 ; i < x*2 ; i++){
-    if(i === 0 || i === 2 ){
+function firstHand(){
       setTimeout(function(){
         player.hand.push(deck.pop());
         renderHand("user")
         cardSlideSound.play()
-      },i*timeUnit )
-    }
-    setTimeout(function(){
-      animateCard('user')
-  },i*timeUnit)
-  }
-  setTimeout(function(){
-      for(i = 0 ; i < n * 2 ; i++){
-        if( i === 0 || i === 2){
-          setTimeout(function(){
-            cpu.hand.push(deck.pop());
-            if( i === 2 && (hiddenswitch)){
-              renderHand("hidden")
-              var hiddenswitch = false;
-            }else{
-              renderHand("cpu")
-            }
-            cardSlideSound.play()
-          },i * timeUnit)
-        }
+        document.getElementById('upper').style.webkitAnimation = "cardbackslidetoplayer .6s 2"
+      },timeUnit )
+      setTimeout(function(){
+        player.hand.push(deck.pop());
+        renderHand("user")
+        cardSlideSound.play()
+      }, 2 * timeUnit)
         setTimeout(function(){
-          animateCard('cpu')
-        }, i * timeUnit)
-    }
-  },timeUnit * (i+1))
+          cpu.hand.push(deck.pop());
+          document.getElementById('upper').style.webkitAnimation = "cardbackslidetocpu .6s 2"
+          renderHand("cpu")
+          cardSlideSound.play()
+        },3 *  timeUnit)
+        setTimeout(function(){
+          cpu.hand.push(deck.pop());
+          renderHand("hidden")
+          cardSlideSound.play()
+        }, 4 * timeUnit)
 }
+
+
 
 
 deckCreation();
