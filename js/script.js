@@ -28,9 +28,9 @@ function deckCreation(){
         num = 10;
       }
       if(values[i] == 'A'){
-        num = 1;
+        num = 11;
       }
-      var card = {Values : values[i] , color : color[j] , num : num , img : "resources/deck/card" + imgindex + ".svg"};
+      var card = {values : values[i] , color : color[j] , num : num , img : "resources/deck/card" + imgindex + ".svg"};
       imgindex++
       deck.push(card);
     }
@@ -99,21 +99,21 @@ function calcolatePoints(){
   cpu.points = 0;
   for(i=0;i<user.hand.length;i++){
     user.points += user.hand[i].num;
-  }if(user.point < 11){
+  }if(user.points > 21){
     for(i=0 ; i<user.hand.length; i++){
       let x =  user.hand[i].values
-      if(x === "A"){
-        user.points +=10
+      if(x == "A"){
+        user.points -= 10
       }
     }
   }
   for(j=0;j<cpu.hand.length;j++){
     cpu.points += cpu.hand[j].num;
-  }if(cpu.point < 11){
+  }if(cpu.points > 21){
     for(i=0 ; i<cpu.hand.length; i++){
       let x =  cpu.hand[i].values
-      if(x === "A"){
-        cpu.points +=10
+      if(x == "A"){
+        cpu.points -=10
       }
     }
   }
