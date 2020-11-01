@@ -90,11 +90,11 @@ function giveCard(arr,string){
   arr.hand.push(deck.pop())
   renderCard(string)
   cardSlideSound.play();
-  calcolatePoints()
+  calculatePoints()
 }
 
 
-function calcolatePoints(){
+function calculatePoints(){
   user.points = 0;
   cpu.points = 0;
   for(i=0;i<user.hand.length;i++){
@@ -119,10 +119,10 @@ function calcolatePoints(){
   }
 }
 function cpuHit(){
-  calcolatePoints()
-  while(cpu.points <= user.points){
+  calculatePoints()
+  while(cpu.points <= 16){
     giveCard( cpu , 'cpu')
-    calcolatePoints()
+    calculatePoints()
   }
 }
 
