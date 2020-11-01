@@ -22,8 +22,8 @@ header{
 }
 
 .playercard{
-  width:30%;
-  flex-shrink: 6;
+  width:20%;
+  flex-shrink: 0;
   background-size: cover;
 }
 

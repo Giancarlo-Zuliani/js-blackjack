@@ -118,6 +118,7 @@ function calculatePoints(){
     }
   }
 }
+
 function cpuHit(){
   calculatePoints()
   while(cpu.points <= 16){
