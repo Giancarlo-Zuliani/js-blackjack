@@ -17,8 +17,16 @@
 
         </div>
         <div class="deckback" id="staticback">
-
         </div>
+        <div class="">
+
+        <button type="button" onclick="firstHand()" name="button">start game</button>
+
+        <div class="">
+          <label for="bet">your bet</label>
+          <input type="number" name="bet" value="">
+        </div>
+      </div>
     </aside>
     <div class="">
 
@@ -29,9 +37,8 @@
     <section id="usersection" class="hand">
     </section>
     <section id="console">
-      <button type="button" onclick="firstHand()" name="button">hit</button>
       <button type="button" onclick="giveCard(user , 'user')" name="button">hit</button>
-
+      <button type="button" onclick="stand()" name="button">stand</button>
 
     </section>
   </div>

@@ -36,8 +36,9 @@ main{
   display:flex;
   width:20%;
   background-color: lightgrey;
-  justify-content: space-around;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   margin: 0;
   position: relative;
   min-height:calc(100vh - 100px);

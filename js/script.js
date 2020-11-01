@@ -63,7 +63,6 @@ function renderCard(string){
   }else if(string === "hidden"){
     var child = document.createElement('div')
     child.classList.add('playercard');
-    var index = cpu.hand.length - 1;
     child.style.backgroundImage= "url(resources/deckback.png)" ;
     document.getElementById('cpusection').appendChild(child)
   }
@@ -103,7 +102,23 @@ function calcolatePoints(){
   for(j=0;j<cpu.hand.length;j++){
     cpu.points += cpu.hand[j].num;
   }
+  if(user.points > 21){
+  }
 }
+
+function cpuHit(){
+  calcolatePoints()
+  while(cpu.points <= user.points){
+    giveCard( cpu , 'cpu')
+    calcolatePoints()
+  }
+}
+
+function stand(){
+  document.getElementsByClassName('playercard')[1].style.backgroundImage="url(" + cpu.hand[1].img + ")"
+  cpuHit();
+}
+
 
 deckCreation();
 shuffleDeck();
