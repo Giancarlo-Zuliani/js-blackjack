@@ -159,6 +159,7 @@ function cleanTable(){
 function checkWhoWin(){
   if(cpu.points == user.points){
     alert("it's a draw");
+    cleanTable();
     let betted = parseInt(document.getElementById('betChips').value)
     user.chips+= betted ;
     document.getElementById('chips').innerHTML= user.chips;
