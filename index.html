@@ -7,12 +7,14 @@
   </head>
   <body>
 
-    <header>
-      <h1>BLack Jack</h1>
-    </header>
     <main>
 
-    <aside id="deck">
+    <div class="">
+
+    <section id="cpusection" class="hand">
+    </section>
+
+      <section id="deck">
         <div class="deckback" id="upper">
 
         </div>
@@ -20,26 +22,22 @@
         </div>
         <div class="">
 
-        <button type="button" onclick="firstHand()" name="button">start game</button>
+          <div id="cpupoints"></div>
+          <div id="userpoints"></div>
 
-        <div class="">
-          <label for="bet">your bet</label>
-          <input type="number" name="bet" value="">
+          <div class="">
+            <button type="button" onclick="firstHand()" name="button">start game</button>
+            <label for="bet">your bet</label>
+            <input type="number" name="bet" value="">
+          </div>
         </div>
-      </div>
-    </aside>
-    <div class="">
-
-    <section id="cpusection" class="hand">
-
-    </section>
+      </section>
 
     <section id="usersection" class="hand">
     </section>
     <section id="console">
       <button type="button" onclick="giveCard(user , 'user')" name="button">hit</button>
       <button type="button" onclick="stand()" name="button">stand</button>
-
     </section>
   </div>
   </main>

@@ -113,17 +113,19 @@ function calculatePoints(){
     for(i=0 ; i<cpu.hand.length; i++){
       let x =  cpu.hand[i].values
       if(x == "A"){
-        cpu.points -=10
+        cpu.points -= 10
       }
     }
   }
+  document.querySelector('#userpoints').innerHTML = user.points;
 }
 
 function cpuHit(){
   calculatePoints()
-  while(cpu.points <= 16){
+  while(cpu.points <= 17 || cpu.points < user.points){
     giveCard( cpu , 'cpu')
     calculatePoints()
+    document.querySelector('#cpupoints').innerHTML = cpu.points;
   }
 }
 
