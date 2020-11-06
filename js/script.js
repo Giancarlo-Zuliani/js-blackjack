@@ -5,12 +5,14 @@ var user = {
   name : 'player' ,
   points : 0 ,
   hand : [] ,
+  chips : 10000
 }
 var cpu = {
   name : 'cpu',
   points:0,
   hand:[],
 }
+
 
 var timeUnit = 600;
 
@@ -45,6 +47,7 @@ function shuffleDeck(){
     deck[index1] = deck[index2];
     deck[index2] = swappCard;
   }
+  document.querySelector('#chips').innerHTML = user.chips
 }
 
 function renderCard(string){
@@ -83,6 +86,9 @@ function firstHand(){
   setTimeout(function(){
     giveCard(cpu , 'hidden')
   }, 4 * timeUnit)
+    let betted =document.getElementById('betChips').value
+    user.chips -= betted;
+    document.querySelector('#chips').innerHTML = user.chips
 }
 
 
@@ -106,6 +112,10 @@ function calculatePoints(){
         user.points -= 10
       }
     }
+    if(user.points > 21){
+      alert('u are over 21')
+      cleanTable();
+    }
   }
   for(j=0;j<cpu.hand.length;j++){
     cpu.points += cpu.hand[j].num;
@@ -122,16 +132,53 @@ function calculatePoints(){
 
 function cpuHit(){
   calculatePoints()
-  while(cpu.points <= 17 || cpu.points < user.points){
+  while(cpu.points <= 17 && cpu.points < user.points){
     giveCard( cpu , 'cpu')
     calculatePoints()
     document.querySelector('#cpupoints').innerHTML = cpu.points;
   }
+  checkWhoWin();
 }
 
 function stand(){
   document.getElementsByClassName('playercard')[1].style.backgroundImage="url(" + cpu.hand[1].img + ")"
   cpuHit();
+}
+
+function cleanTable(){
+  user.hand = [];
+  cpu.hand=[];
+  user.points = 0;
+  cpu.points= 0;
+  document.getElementById('cpusection').innerHTML = "";
+  document.getElementById('usersection').innerHTML = "";
+  document.getElementById('cpupoints').innerHTML ="";
+  document.getElementById('userpoints').innerHTML ="";
+}
+
+function checkWhoWin(){
+  if(cpu.points == user.points){
+    alert("it's a draw");
+    let betted = parseInt(document.getElementById('betChips').value)
+    user.chips+= betted ;
+    document.getElementById('chips').innerHTML= user.chips;
+  }
+  else if(user.points > cpu.points || cpu.point > 21){
+    let betted = parseInt(document.getElementById('betChips').value)
+    user.chips+= betted *2;
+    document.getElementById('chips').innerHTML= user.chips;
+      alert('u win');
+    cleanTable();
+  }else if( user.points < cpu.points && cpu.points < 22){
+    alert('u lose');
+    cleanTable();
+  }else if(cpu.points > 21){
+    alert('dealer is over');
+    let betted = parseInt(document.getElementById('betChips').value)
+    user.chips += betted *2;
+    document.getElementById('chips').innerHTML= user.chips;
+    cleanTable();
+  }
 }
 
 
